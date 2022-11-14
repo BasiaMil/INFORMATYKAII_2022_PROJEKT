@@ -15,7 +15,7 @@ int main()
 }
 
 /*
-1)Interface:
+I)Interface:
    -Opcje:	
 	Nowa gra
 	Wczytaj gre
@@ -23,8 +23,8 @@ int main()
 	Kolekcja(?)
 	Pomoc
 	Wyjœcie
-   -Zanimowane t³o typu gwiazdy koazywane na wyk³adzie
-2)Nowa gra:
+   -Zanimowane t³o typu gwiazdy pokazywane na wyk³adzie
+ 1)Nowa gra:
    -Zaczynamy od poziomu pierwszego
    -Wybieramy trudnoœæ:
     >szerokoœæ paletki
@@ -32,19 +32,72 @@ int main()
 	>czy s¹ spadaj¹ce obiekty
    -Podajemy nick
    -dostajemy ID
-3)Wczytaj gre:
+ 2)Wczytaj gre:
    -Mo¿emy wybraæ poziom od 1 do ostatnio osi¹gniêtego
    -Wybieramy trudnoœæ:
 	>szerokoœæ paletki
 	>szybkoœæ pi³ki
 	>czy s¹ spadaj¹ce obiekty
    -Wyœwiatlaj¹ sie nasze nick i ID
-4)WYniki:
+ 3)WYniki:
    -wyœwietlane w fomie tablicy:
     >miejsce
 	>Nick
 	>ID
 	>Punkty
-
-
+	>Z³apane potworki
+ 4)Kolekcja:
+   -Wyœwietlane obrazki z³apanych ju¿ stworkó
+ 5)Pomoc:
+   -Sterowanie
+   -Za co s¹ punkty
+   -Jak przejœæ poziom
+ 6)Wyjœcie:
+   -Pytanie czy na pewno chce siê wyœæ:
+    >Tak-Wyjœcie bez wyœwietlenoa informacji o b³êdach
+	>Nie-Powrót do interfejsu
+II)Faza rozgrywki:
+ 1)Elementy graficzne:
+	-Na górze kolejno od lewej:
+	 >czas do koñca rundy
+	 >punkty
+	 >Zmieniaj¹cy siê komunikaty:"Z³apany!","Straci³eœ ¿ycie!", "Wszystkie z³apane!"
+	 >¿ycia
+	 >poziom
+	-Obwódka - niewielki odstêp od œcian bocznych i do³u oraz poni¿ej napisów na górze
+	-t³o: typu "migaj¹ce gwiazdy"
+	-W ramce na górze pojawiaj¹ce siê w ró¿nej konfiguracji zale¿nie od poziomu przeszkody (na³o¿ony sprite trawy) i stworki równie¿ sprite
+	-Na dole w ramce paletka sterowana klawiszami poruszaj¹ca siê poziomo
+	-W ramce pi³ke odbijajaca siê od paletki œcian bocznych i górnej oraz przeszkód, po uderzeniu przeskody i stworka przez pi³kê, znikaj¹
+	-W ramce spadaj¹ca z góry na dó³ przeszkoda
+	-W lewym dolnym rogu nad wszystkim ikona pomocy
+ 2)Pomoc:
+	-Klikniêcie w lewym dolnym rogu ikony pomoc (lub wciœniêcie klawisza F1) spowoduje zapauzowanie gry i wyœwietlenie na ekranie zasad
+	-Wyjœcie z niej nast¹pi przez naciœniecie odpowiedniego przycisku, potem kontynuuje siê gre
+ 3)Wyjœcie:
+	-Wyjœcie nast¹pi przez klikniêcie klawisza Esc
+	-Przed wyjœciem nast¹pi zapytanie czy na pewno chce siê opuœciæ rozgrywkê:
+	 >tak-wyjœcie do interface'u/z gry
+	 >nie-wznowienie gry
+ 4)Rozgrywka:
+	-Na planszy umieszczone s¹ przeszkody i stworki.
+	-Uderzenie pi³k¹ w przeszkodê lub stworka sprawi, ¿e one znikn¹.
+	-Ka¿da usuniêta przeszkoda i z³apany stworek daj¹ pkt odpowiednio +2 i +10.
+	-Je¿eli zosta³o to wybrane, bêd¹ niekiedy spadaæ obiekty, które je¿eli dotkn¹³ paletki, to odejm¹ 5 pkt.
+	-Poziom koñczy siê wygran¹, gdy w okreœlonym czasie zostan¹ z³apane wszystkie stworki.
+	-Pozosta³y czas zostaje zamieniony na pkt dodatkowe 1s->1pkt.
+	-S¹ 3 ¿ycie. Traci siê je po uderzeniu przez obiekt spadaj¹cy lub po nie odbiciu pi³eczki.
+	-Przegrana nastêpuje poprzez:
+	 >stracenie 3 ¿yæ,
+	 >up³yw czasu.
+	-Po wygraniu mo¿na przejœæ do nastêpnego poziomu.
+	-Raczej nie bêdzie mo¿liwoœci zmiany trudnoœci miêdzy poziomami ale zobaczymy.
+	-Iloœæ dodawanych i odejmowanych pkt bêdzie zale¿eæ od wybranej trudnoœci.
+III)Zapis gry:
+ 1) Co zapisujemy:
+	-nick
+	-iloœæ pkt
+	-ostatni ukoñczony poziom
+	-z³apane rodzaje stworków(?)
+	-ustawion¹ trudnoœæ
 */
