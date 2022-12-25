@@ -9,38 +9,43 @@ przeszkód i ³apanie stworków oraz za ukoñczenie gry przed limitem czasu. Ujemne 
 #include <SFML/Graphics.hpp>
 #include<random>
 #include<iostream>
+#include <string>
 
-const int N = 10;
-sf::CircleShape tab[N];
+
+
+
+//t³o////////////////////////////////////////////////////////////
+
 class gwiazdozbior {
 private:
 	std::random_device rd;
+	int N;
+	sf::CircleShape* gwiazdy;
 public:
-	gwiazdozbior(int N);
+	gwiazdozbior(int Nt);
 	void draw(sf::RenderWindow &window);
 	void move();
 
 };
 
-gwiazdozbior::gwiazdozbior(int N) {
+gwiazdozbior::gwiazdozbior(int Nt) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distX(1, 750);
 	std::uniform_int_distribution<> distY(1, 550);
 	std::uniform_int_distribution<> distR(10, 50);
 	
 	float x = 0, y = 0, R=0;	
-	
-	
-	
-	
+	N = Nt;
+	gwiazdy = new sf::CircleShape[N];
+		
 	for (int i = 0; i < N; i++) {
 		x = distX(gen);
 		y = distY(gen);
 		R = distR(gen);
 
-		tab[i] = sf::CircleShape(R);
-		tab[i].setPosition(sf::Vector2f(x, y));
-		tab[i].setScale(sf::Vector2f(0.03f, 0.03f));
+		gwiazdy[i] = sf::CircleShape(R);
+		gwiazdy[i].setPosition(sf::Vector2f(x, y));
+		gwiazdy[i].setScale(sf::Vector2f(0.03f, 0.03f));
 
 
 	}
@@ -49,31 +54,190 @@ gwiazdozbior::gwiazdozbior(int N) {
 void gwiazdozbior::draw(sf::RenderWindow & window) {
 	for (int i = 0; i < N; i++) 
 	{
-		window.draw(tab[i]);
+		window.draw(gwiazdy[i]);
 	}
 }
 
 void gwiazdozbior::move() {
 	std::mt19937 gen(rd());  
-	std::uniform_int_distribution<> distX(1, 750);
-	std::uniform_int_distribution<> distY(1, 550);
+	std::uniform_int_distribution<> distX(1, 800);
+	std::uniform_int_distribution<> distY(1, 600);
 	std::uniform_int_distribution<> distXl(-20, 20);
 	std::uniform_int_distribution<> distYl(-20, 20);
 	for (int i = 0; i < N; i++) 
 	{
-		tab[i].move(sf::Vector2f(distXl(gen), distYl(gen)));
-		sf::Vector2f position = tab[i].getPosition();
-		if (position.x > 750 || position.x < 0 || position.y > 530 || position.y < 0)
-			tab[i].setPosition(distX(gen), distY(gen));
+		gwiazdy[i].move(sf::Vector2f(distXl(gen), distYl(gen)));
+		sf::Vector2f position = gwiazdy[i].getPosition();
+		if (position.x > 800 || position.x < 0 || position.y > 600 || position.y < 0)
+			gwiazdy[i].setPosition(distX(gen), distY(gen));
 	}
 }
+//t³o/////////////////////////////////////////////////////////////////////////////////////////
+//interface//////
+class interfejs {
+protected:
+	void init(sf::Vector2f window_size);
+	sf::Font* font;	
+	sf::Text* lewy;
+	sf::Text* prawy;
+	sf::Text* dolsrodek;
+	sf::Text* gorasrodek;
+	sf::RectangleShape* prostokat;
+	sf::Vector2f wymiary;
 
+public:
+	void draw(sf::RenderWindow& window);//
+	void setText(sf::Text* lewy, sf::Text* prawy, sf::Text* dolsrodek, sf::Text* gorasrodek);//
+	interfejs(sf::Vector2f wymiary);//
+	~interfejs();//
 
-int main()
-{
+};
+
+interfejs::interfejs(sf::Vector2f wymiary) {
+	this->wymiary.x = wymiary.x;
+	this->wymiary.y = wymiary.y;
+	sf::Vector2f window_size(756.f, 500);
+	init(window_size);
+}
+interfejs::~interfejs() {
+	delete prostokat;
+	prostokat = NULL;
+	delete lewy;
+	lewy = NULL;
+	delete prawy;
+	prawy = NULL;
+	delete dolsrodek;
+	dolsrodek = NULL;
+	delete gorasrodek;
+	gorasrodek = NULL;
+}
+void interfejs::draw(sf::RenderWindow& window) {
+	window.draw(*prostokat);
+	window.draw(*lewy);
+	window.draw(*prawy);
+	window.draw(*dolsrodek);
+	window.draw(*gorasrodek);
+}
+
+void interfejs::setText(sf::Text* lewy, sf::Text* prawy, sf::Text* dolsrodek, sf::Text* gorasrodek) {
+
+	font = new sf::Font;
+	font->loadFromFile("arial.ttf");
+	lewy->setFont(*font);
+	prawy->setFont(*font);
+	dolsrodek->setFont(*font);
+	gorasrodek->setFont(*font);
+
+	lewy->setString("Punkty:");
+	lewy->setFillColor(sf::Color(45, 8, 210));
+	lewy->setPosition(10.f, 5.f);
+
+	prawy->setString("Poziom:");
+	prawy->setFillColor(sf::Color(24, 200, 55));
+	prawy->setPosition(600.f, 5.f);
+
+	dolsrodek->setString("Animowany napis");
+	dolsrodek->setFillColor(sf::Color(80, 25, 8));
+	dolsrodek->setPosition(310.f, 550.f);
+
+	gorasrodek->setString("Zycia");
+	gorasrodek->setFillColor(sf::Color(40, 80, 160));
+	gorasrodek->setPosition(310.f, 5.f);
+}
+
+void interfejs::init(sf::Vector2f window_size) {
+
+	lewy = new sf::Text;
+	prawy = new sf::Text;
+	dolsrodek = new sf::Text;
+	gorasrodek = new sf::Text;
+	prostokat = new sf::RectangleShape;
+
+	prostokat->setPosition(22.f, 50.f);
+	prostokat->setSize(wymiary);
+	prostokat->setFillColor(sf::Color(10, 200, 100));
+
+	setText(lewy, prawy, dolsrodek, gorasrodek);
+
+}
+//interface/////////////////
+//gra///////////////////
+	//paletka//////////////////////////
+class paletka {
+
+};
+	//paletka///////////////////
+	//pokeball//////////////////////
+class Pokeball {
+private:
+	sf::Vector2f position;
+	float xVel = 1, yVel = 1;
+	sf::Texture tekstura;
+	sf::Sprite pSprite;
+	sf::Vector2f rozmiar_okna;
+	float x = 756, y = 500;
+
+public:
+	Pokeball(float x_in, float y_in, float x_a, float y_b) {
+		position.x = x_in;
+		position.y = y_in;
+		rozmiar_okna.x = x_a;
+		rozmiar_okna.y = y_b;
+		tekstura.loadFromFile("pokeball.png");
+		pSprite.setTexture(tekstura);
+		pSprite.setPosition(position);
+
+	}
+	void przesun(float x_in, float y_in) {
+		sf::Vector2f pos;
+		pos.x = x_in;
+		pos.y = y_in;
+		pSprite.move(pos);
+		position = pSprite.getPosition();
+	}
+	sf::Sprite getPokeball() {
+		return pSprite;
+	}
+	void sprawdzKolizjeSciany() {
+		if (position.x <= 22)
+			xVel = 4;
+		if (position.x >= 678)
+			xVel = -1;
+		if (position.y <= 50)
+			yVel = 3;
+		if (position.y >= 450)
+			yVel = -2;
+	}
+	void animuj() {
+		sprawdzKolizjeSciany();
+		przesun(xVel, yVel);
+	}
+};
+	//pokeball///////////////////
+	// strza³////////////////
+class strza³ {
+
+	};
+	// strza³/////////////
+	// trawa///////////
+class obiekty {
+
+};
+	// trawa///////////////
+	// pokemony////////////////
+class pokemon {
+
+};
+	// pokemony/////////////
+//gra/////////////////
+int main(){
+	using namespace std;
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Gwiazdozbior");
 	sf::Clock zegar;
-	gwiazdozbior td(10);
+	
+	interfejs p1(sf::Vector2f(756.f, 500.f));
+	gwiazdozbior td(1000);
+	Pokeball pb(400, 10, 756, 500);
 
 	while (window.isOpen())
 	{
@@ -84,16 +248,21 @@ int main()
 				window.close();
 		}
 
-		if (zegar.getElapsedTime().asMilliseconds() > 100.0f) {
+		if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
 			td.move();//nowa pozycja Toad'ow		
+			pb.animuj();
 			zegar.restart();
 		}
 
-		window.clear(sf::Color::Blue);
+		window.clear(sf::Color::Black);
 		td.draw(window);//metoda draw() obiektu klasy toads
+		p1.draw(window);
+		window.draw(pb.getPokeball());
 		window.display();
-	}
 
+		
+		//t³o///////////////////////////////////////////////////////////////////
+	}
 
 
 	return 0;
@@ -108,7 +277,7 @@ I)Interface:
 	Kolekcja(?)
 	Pomoc
 	Wyjœcie
-   -Zanimowane t³o typu gwiazdy pokazywane na wyk³adzie
+   -Zanimowane t³o typu gwiazdy
  1)Nowa gra:
    -Zaczynamy od poziomu pierwszego
    -Wybieramy trudnoœæ:
@@ -119,10 +288,6 @@ I)Interface:
    -dostajemy ID
  2)Wczytaj gre:
    -Mo¿emy wybraæ poziom od 1 do ostatnio osi¹gniêtego
-   -Wybieramy trudnoœæ:
-	>szerokoœæ paletki
-	>szybkoœæ pi³ki
-	>czy s¹ spadaj¹ce obiekty
    -Wyœwiatlaj¹ sie nasze nick i ID
  3)WYniki:
    -wyœwietlane w fomie tablicy:
@@ -132,7 +297,7 @@ I)Interface:
 	>Punkty
 	>Z³apane potworki
  4)Kolekcja:
-   -Wyœwietlane obrazki z³apanych ju¿ stworkó
+   -Wyœwietlane obrazki z³apanych ju¿ stworków
  5)Pomoc:
    -Sterowanie
    -Za co s¹ punkty
@@ -143,11 +308,10 @@ I)Interface:
 	>Nie-Powrót do interfejsu
 II)Faza rozgrywki:
  1)Elementy graficzne:
-	-Na górze kolejno od lewej:
-	 >czas do koñca rundy
+	-Napisy
 	 >punkty
 	 >Zmieniaj¹cy siê komunikaty:"Z³apany!","Straci³eœ ¿ycie!", "Wszystkie z³apane!"
-	 >¿ycia
+	 >Zycia
 	 >poziom
 	-Obwódka - niewielki odstêp od œcian bocznych i do³u oraz poni¿ej napisów na górze
 	-t³o: typu "migaj¹ce gwiazdy"
