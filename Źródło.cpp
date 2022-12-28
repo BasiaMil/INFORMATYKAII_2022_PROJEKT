@@ -96,7 +96,7 @@ public:
 interfejs::interfejs(sf::Vector2f wymiary) {
 	this->wymiary.x = wymiary.x;
 	this->wymiary.y = wymiary.y;
-	sf::Vector2f window_size(756.f, 500);
+	sf::Vector2f window_size(800.f, 600);
 	init(window_size);
 }
 interfejs::~interfejs() {
@@ -153,7 +153,7 @@ void interfejs::init(sf::Vector2f window_size) {
 	gorasrodek = new sf::Text;
 	prostokat = new sf::RectangleShape;
 
-	prostokat->setPosition(22.f, 50.f);
+	prostokat->setPosition(20.f, 50.f);
 	prostokat->setSize(wymiary);
 	prostokat->setFillColor(sf::Color(10, 200, 100));
 
@@ -164,7 +164,32 @@ void interfejs::init(sf::Vector2f window_size) {
 //gra///////////////////
 	//paletka//////////////////////////
 class paletka {
-
+private:
+	sf::RectangleShape palletka;
+	sf::Vector2f position;
+	float xVel = 10;
+	float yVel = 10;
+	
+public:
+	paletka(float x_in, float y_in)
+	{
+		position.x = x_in;
+		position.y = y_in;
+		palletka.setFillColor(sf::Color(10, 50, 150));
+		palletka.setSize(sf::Vector2f(80, 30));
+		palletka.setOutlineThickness(10);
+		palletka.setOutlineColor(sf::Color(0, 0, 0));
+		palletka.setPosition(position);
+	};
+	void przesun(float x_in, float y_in)
+	{
+		sf::Vector2f pos;
+		pos.x = x_in;
+		pos.y = y_in;
+		palletka.move(pos);
+	};
+	sf::RectangleShape getPaletka() { return palletka; }
+	sf::Vector2f getPos() { return palletka.getPosition(); }
 };
 	//paletka///////////////////
 	//pokeball//////////////////////
@@ -175,7 +200,7 @@ private:
 	sf::Texture tekstura;
 	sf::Sprite pSprite;
 	sf::Vector2f rozmiar_okna;
-	float x = 756, y = 500;
+	float x = 760, y = 500;
 
 public:
 	Pokeball(float x_in, float y_in, float x_a, float y_b) {
@@ -199,14 +224,14 @@ public:
 		return pSprite;
 	}
 	void sprawdzKolizjeSciany() {
-		if (position.x <= 22)
-			xVel = 4;
-		if (position.x >= 678)
-			xVel = -1;
+		if (position.x <= 20)
+			xVel = 5;
+		if (position.x >= 680)
+			xVel = -2;
 		if (position.y <= 50)
-			yVel = 3;
+			yVel = 4;
 		if (position.y >= 450)
-			yVel = -2;
+			yVel = -3;
 	}
 	void animuj() {
 		sprawdzKolizjeSciany();
@@ -235,17 +260,35 @@ int main(){
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Gwiazdozbior");
 	sf::Clock zegar;
 	
-	interfejs p1(sf::Vector2f(756.f, 500.f));
+	interfejs p1(sf::Vector2f(760.f, 500.f));
 	gwiazdozbior td(1000);
-	Pokeball pb(400, 10, 756, 500);
+	Pokeball pb(400, 10, 760, 500);
+	paletka pal(320,504);
+	int a = 320;
 
 	while (window.isOpen())
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed )
 				window.close();
+			
+			if (event.type == sf::Event::KeyPressed)
+		{
+			
+			if (event.key.code == sf::Keyboard::A && a>30)
+			{
+				pal.przesun(-10, 0);
+				a = a - 10;
+			}
+			if (event.key.code == sf::Keyboard::D && a<690)
+			{
+				pal.przesun(10, 0);
+				a = a + 10;
+			}
+		}
+
 		}
 
 		if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
@@ -257,9 +300,11 @@ int main(){
 		window.clear(sf::Color::Black);
 		td.draw(window);//metoda draw() obiektu klasy toads
 		p1.draw(window);
+		window.draw(pal.getPaletka());
 		window.draw(pb.getPokeball());
 		window.display();
 
+		
 		
 		//t³o///////////////////////////////////////////////////////////////////
 	}
