@@ -213,9 +213,7 @@ public:
 		pSprite.setPosition(position);
 
 	}
-	float getx(float x_) {
-
-	};
+	
 	void przesun(float x_in, float y_in) {
 		sf::Vector2f pos;
 		pos.x = x_in;
@@ -246,11 +244,6 @@ public:
 	}
 };
 	//pokeball///////////////////
-	// strza³////////////////
-class strza³ {
-
-	};
-	// strza³/////////////
 	// trawa///////////
 class obiekty {
 private:
@@ -290,6 +283,7 @@ public:
 
 		}
 	};
+
 	void draw(sf::RenderWindow& window) {
 		for (int i = 0; i < N; i++)
 		{
@@ -339,6 +333,7 @@ int main(){
 				pal.przesun(10, 0);
 				a = a + 10;
 			}
+			
 		
 		}
 
@@ -347,18 +342,17 @@ int main(){
 		if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
 			td.move();//nowa pozycja Toad'ow		
 			pb.animuj();
-			sf::Vector2f b;
-		pal.getPos() = b;
-		sf::Vector2f c;
-		pb.getPos() = c;
-		if ((c.x + 50 >= b.x - 10) && (c.x + 50 <= b.x + 90) && (c.y + 100 == b.y + 10)) 
-		{
-			cout << "Kolizja!";
-		}
 			zegar.restart();
+			cout << pal.getPos().x<<"...." <<pal.getPos().y<<"..."<< pb.getPos().x << "..." << pb.getPos().y << endl;
+			if (pb.getPos().x+50 >= pal.getPos().x-10 && pb.getPos().x+50 <= pal.getPos().x + 90 && pb.getPos().y+100 >= pal.getPos().y - 15 && pb.getPos().y + 100 <= pal.getPos().y - 8)
+		{
+			cout << "Kolizja";
+		}
+			
+			
 		}
 		
-
+		
 		
 
 		window.clear(sf::Color::Black);
