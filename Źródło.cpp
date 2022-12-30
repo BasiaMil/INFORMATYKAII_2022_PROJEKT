@@ -213,6 +213,9 @@ public:
 		pSprite.setPosition(position);
 
 	}
+	float getx(float x_) {
+
+	};
 	void przesun(float x_in, float y_in) {
 		sf::Vector2f pos;
 		pos.x = x_in;
@@ -222,6 +225,9 @@ public:
 	}
 	sf::Sprite getPokeball() {
 		return pSprite;
+	}
+	sf::Vector2f getPos() {
+		return pSprite.getPosition();
 	}
 	void sprawdzKolizjeSciany() {
 		if (position.x <= 20)
@@ -236,6 +242,7 @@ public:
 	void animuj() {
 		sprawdzKolizjeSciany();
 		przesun(xVel, yVel);
+		
 	}
 };
 	//pokeball///////////////////
@@ -246,7 +253,51 @@ class strza³ {
 	// strza³/////////////
 	// trawa///////////
 class obiekty {
+private:
+	int N, M;
+	sf::RectangleShape* oobiekty1;
+	sf::RectangleShape* oobiekty2;
+	sf::RectangleShape* oobiekty3;
+public:
+	obiekty( int Nt, int Mt) {
+		float x = 0, y = 0;
+		M = Mt;
+		N = Nt;
+		oobiekty1 = new sf::RectangleShape[N];
+		oobiekty2 = new sf::RectangleShape[N];
+		oobiekty3 = new sf::RectangleShape[N];
 
+		for (int i = 0; i < N; i++) {
+			x = 25+i*50;
+			
+			oobiekty1[i] = sf::RectangleShape(sf::Vector2f(45, 45));
+			oobiekty1[i].setPosition(sf::Vector2f(x, 55));
+			oobiekty1[i].setFillColor(sf::Color(33, 47, 148));
+			oobiekty1[i].setOutlineColor(sf::Color(0,0,0));
+			oobiekty1[i].setOutlineThickness(2);
+			
+			oobiekty2[i] = sf::RectangleShape(sf::Vector2f(45, 45));
+			oobiekty2[i].setPosition(sf::Vector2f(x, 105));
+			oobiekty2[i].setFillColor(sf::Color(140, 0, 20));
+			oobiekty2[i].setOutlineColor(sf::Color(0, 0, 0));
+			oobiekty2[i].setOutlineThickness(2);
+
+			oobiekty3[i] = sf::RectangleShape(sf::Vector2f(45, 45));
+			oobiekty3[i].setPosition(sf::Vector2f(x, 155));
+			oobiekty3[i].setFillColor(sf::Color(0,133, 5));
+			oobiekty3[i].setOutlineColor(sf::Color(0, 0, 0));
+			oobiekty3[i].setOutlineThickness(2);
+
+		}
+	};
+	void draw(sf::RenderWindow& window) {
+		for (int i = 0; i < N; i++)
+		{
+			window.draw(oobiekty1[i]);
+			window.draw(oobiekty2[i]);
+			window.draw(oobiekty3[i]);
+		}
+	};
 };
 	// trawa///////////////
 	// pokemony////////////////
@@ -264,6 +315,7 @@ int main(){
 	gwiazdozbior td(1000);
 	Pokeball pb(400, 10, 760, 500);
 	paletka pal(320,504);
+	obiekty ob(15,3);
 	int a = 320;
 
 	while (window.isOpen())
@@ -287,6 +339,7 @@ int main(){
 				pal.przesun(10, 0);
 				a = a + 10;
 			}
+		
 		}
 
 		}
@@ -294,14 +347,26 @@ int main(){
 		if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
 			td.move();//nowa pozycja Toad'ow		
 			pb.animuj();
+			sf::Vector2f b;
+		pal.getPos() = b;
+		sf::Vector2f c;
+		pb.getPos() = c;
+		if ((c.x + 50 >= b.x - 10) && (c.x + 50 <= b.x + 90) && (c.y + 100 == b.y + 10)) 
+		{
+			cout << "Kolizja!";
+		}
 			zegar.restart();
 		}
+		
+
+		
 
 		window.clear(sf::Color::Black);
 		td.draw(window);//metoda draw() obiektu klasy toads
 		p1.draw(window);
 		window.draw(pal.getPaletka());
 		window.draw(pb.getPokeball());
+		ob.draw(window);
 		window.display();
 
 		
