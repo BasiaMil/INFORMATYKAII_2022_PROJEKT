@@ -229,15 +229,25 @@ public:
 	}
 	void sprawdzKolizjeSciany() {
 		if (position.x <= 20)
-			xVel = 5;
+			xVel = 3;
 		if (position.x >= 680)
 			xVel = -2;
 		if (position.y <= 50)
-			yVel = 4;
+			yVel = 2;
 		if (position.y >= 450)
-			yVel = -3;
+		{
+			xVel = 0;
+			yVel = 0;
+		}
+			
+			
+			
 	}
-	void animuj() {
+	void odbicie() {
+		yVel = -yVel;
+	}
+	void animuj() 
+	{
 		sprawdzKolizjeSciany();
 		przesun(xVel, yVel);
 		
@@ -247,14 +257,16 @@ public:
 	// trawa///////////
 class obiekty {
 private:
-	int N, M;
+	int N;
+	sf::Font* font;
+	sf::Text* lewy;
 	sf::RectangleShape* oobiekty1;
 	sf::RectangleShape* oobiekty2;
 	sf::RectangleShape* oobiekty3;
 public:
 	obiekty( int Nt, int Mt) {
 		float x = 0, y = 0;
-		M = Mt;
+		
 		N = Nt;
 		oobiekty1 = new sf::RectangleShape[N];
 		oobiekty2 = new sf::RectangleShape[N];
@@ -343,10 +355,10 @@ int main(){
 			td.move();//nowa pozycja Toad'ow		
 			pb.animuj();
 			zegar.restart();
-			cout << pal.getPos().x<<"...." <<pal.getPos().y<<"..."<< pb.getPos().x << "..." << pb.getPos().y << endl;
-			if (pb.getPos().x+50 >= pal.getPos().x-10 && pb.getPos().x+50 <= pal.getPos().x + 90 && pb.getPos().y+100 >= pal.getPos().y - 15 && pb.getPos().y + 100 <= pal.getPos().y - 8)
+			
+			if (pb.getPos().x+50 >= pal.getPos().x-10 && pb.getPos().x+50 <= pal.getPos().x + 90 && pb.getPos().y+100 >= pal.getPos().y  && pb.getPos().y + 100 <= pal.getPos().y+10 )
 		{
-			cout << "Kolizja";
+			pb.odbicie();
 		}
 			
 			
