@@ -195,15 +195,25 @@ public:
 	//pokeball//////////////////////
 class Pokeball {
 private:
+	void cos(sf::Vector2f window_size) {
+		koniec = new sf::Text;
+		napis(koniec);
+
+	};
+	sf::Text* koniec;
+	sf::Font* font;
 	sf::Vector2f position;
 	float xVel = 1, yVel = 1;
 	sf::Texture tekstura;
 	sf::Sprite pSprite;
 	sf::Vector2f rozmiar_okna;
 	float x = 760, y = 500;
+	
 
 public:
-	Pokeball(float x_in, float y_in, float x_a, float y_b) {
+	
+	Pokeball(float x_in, float y_in, float x_a, float y_b) 
+	{
 		position.x = x_in;
 		position.y = y_in;
 		rozmiar_okna.x = x_a;
@@ -211,10 +221,29 @@ public:
 		tekstura.loadFromFile("pokeball.png");
 		pSprite.setTexture(tekstura);
 		pSprite.setPosition(position);
-
+		sf::Vector2f window_size(800.f, 600);
+		cos(window_size);
 	}
 	
+
+	void napis(sf::Text* koniec) 
+	{
+		font = new sf::Font;
+		font->loadFromFile("arial.ttf");
+		koniec->setFont(*font);		
+		koniec->setString("Koniec gry!!!");
+		koniec->setCharacterSize(75);
+		koniec->setRotation(-45);
+		koniec->setFillColor(sf::Color(200, 20, 20));
+		koniec->setPosition(200.f, 350.f);
+	}
+
+	void draw(sf::RenderWindow& window) 
+	{
+		window.draw(*koniec);
+	}
 	void przesun(float x_in, float y_in) {
+		
 		sf::Vector2f pos;
 		pos.x = x_in;
 		pos.y = y_in;
@@ -246,11 +275,16 @@ public:
 	void odbicie() {
 		yVel = -yVel;
 	}
+
+	float stop() {
+		
+		return xVel;
+	}
+
 	void animuj() 
 	{
 		sprawdzKolizjeSciany();
-		przesun(xVel, yVel);
-		
+		przesun(xVel, yVel);		
 	}
 };
 	//pokeball///////////////////
@@ -258,8 +292,6 @@ public:
 class obiekty {
 private:
 	int N;
-	sf::Font* font;
-	sf::Text* lewy;
 	sf::RectangleShape* oobiekty1;
 	sf::RectangleShape* oobiekty2;
 	sf::RectangleShape* oobiekty3;
@@ -355,24 +387,30 @@ int main(){
 			td.move();//nowa pozycja Toad'ow		
 			pb.animuj();
 			zegar.restart();
+
+			cout << pb.getPos().y << "\n";
 			
 			if (pb.getPos().x+50 >= pal.getPos().x-10 && pb.getPos().x+50 <= pal.getPos().x + 90 && pb.getPos().y+100 >= pal.getPos().y  && pb.getPos().y + 100 <= pal.getPos().y+10 )
 		{
 			pb.odbicie();
 		}
+		
 			
 			
 		}
 		
 		
 		
-
 		window.clear(sf::Color::Black);
 		td.draw(window);//metoda draw() obiektu klasy toads
 		p1.draw(window);
 		window.draw(pal.getPaletka());
 		window.draw(pb.getPokeball());
 		ob.draw(window);
+		if (pb.getPos().y == 450) 
+		{
+			pb.draw(window);
+		}
 		window.display();
 
 		
