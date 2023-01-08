@@ -130,7 +130,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gwiazdozbior.cpp" />
+    <ClCompile Include="interfejs.cpp" />
+    <ClCompile Include="paletka.cpp" />
+    <ClCompile Include="Pokeball.cpp" />
     <ClCompile Include="Źródło.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gwiazdozbior.h" />
+    <ClInclude Include="interfejs.h" />
+    <ClInclude Include="paletka.h" />
+    <ClInclude Include="Pokeball.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
