@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include<random>
 #include<iostream>
-#include <string>#pragma once
+#include <string>
 
 class gwiazdozbior {
 private:

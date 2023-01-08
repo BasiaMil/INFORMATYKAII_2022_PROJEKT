@@ -132,6 +132,8 @@
   <ItemGroup>
     <ClCompile Include="gwiazdozbior.cpp" />
     <ClCompile Include="interfejs.cpp" />
+    <ClCompile Include="Klocki.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="paletka.cpp" />
     <ClCompile Include="Pokeball.cpp" />
     <ClCompile Include="Źródło.cpp" />
@@ -139,6 +141,8 @@
   <ItemGroup>
     <ClInclude Include="gwiazdozbior.h" />
     <ClInclude Include="interfejs.h" />
+    <ClInclude Include="Klocki.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="paletka.h" />
     <ClInclude Include="Pokeball.h" />
   </ItemGroup>
