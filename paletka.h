@@ -8,12 +8,23 @@ class paletka {
 private:
 	sf::RectangleShape palletka;
 	sf::Vector2f position;
-	float xVel = 10;
-	float yVel = 10;
+	
 
 public:
+	float Velmax;
+	float Veloczekiwany=0;
+	float Velteraz=0;
+	float przyspieszenie=5;
 	paletka(float x_in, float y_in);
-	void przesun(float x_in, float y_in);
 	sf::RectangleShape getPaletka();
 	sf::Vector2f getPos();
+	void setPos(float x_i, float y_i);
+	float lewa_strona() ;
+	float prawa_strona();
+	float dol();
+	float gora();
+	float predkosc(float Velmax, float Velteraz,float przyspieszenie);
+	void ruch();
+	void update();
+	
 };

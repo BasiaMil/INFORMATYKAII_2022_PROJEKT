@@ -19,6 +19,8 @@ Pokeball::Pokeball(float x_in, float y_in, float x_a, float y_b)
 		tekstura.loadFromFile("pokeball.png");
 		pSprite.setTexture(tekstura);
 		pSprite.setPosition(position);
+		pSprite.setOrigin(50, 50);
+		pSprite.setScale(0.5,0.5);
 		sf::Vector2f window_size(800.f, 600);
 		cos(window_size);
 	}
@@ -51,14 +53,19 @@ sf::Sprite Pokeball::getPokeball() {
 sf::Vector2f Pokeball:: getPos() {
 		return pSprite.getPosition();
 	}
+float Pokeball::lewa_strona() { return getPos().x - 25; };
+float Pokeball::prawa_strona() { return getPos().x + 25; };
+float Pokeball::dol() { return getPos().y + 25; };
+float Pokeball::gora() { return getPos().y - 25; };
+
 void Pokeball:: sprawdzKolizjeSciany() {
-		if (position.x <= 20)
-			xVel = 3;
-		if (position.x >= 680)
-			xVel = -2;
-		if (position.y <= 50)
-			yVel = 2;
-		if (position.y >= 450)
+		if (lewa_strona() <= 20)
+			xVel = -xVel;
+		if (prawa_strona()  >= 780)
+			xVel = -xVel;
+		if (gora() <= 50)
+			yVel = -yVel;
+		if (dol() >= 550)
 		{
 			xVel = 0;
 			yVel = 0;
@@ -68,10 +75,10 @@ void Pokeball::odbicie() {
 		yVel = -yVel;
 	}
 
-float Pokeball::stop() {
-
-		return xVel;
-	}
+float Pokeball::stop() 
+{
+	return xVel;
+}
 
 void Pokeball::animuj()
 	{

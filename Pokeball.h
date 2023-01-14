@@ -10,7 +10,7 @@ private:
 	sf::Text* koniec;
 	sf::Font* font;
 	sf::Vector2f position;
-	float xVel = 1, yVel = 1;
+	float xVel = 3, yVel = 3;
 	sf::Texture tekstura;
 	sf::Sprite pSprite;
 	sf::Vector2f rozmiar_okna;
@@ -29,4 +29,8 @@ public:
 	void odbicie();
 	float stop();
 	void animuj();
+	float lewa_strona() ;
+	float prawa_strona() ;
+	float dol() ;
+	float gora() ;
 };

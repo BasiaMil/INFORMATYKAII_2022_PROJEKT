@@ -36,6 +36,9 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Wyjscie.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="interfejs.h">
@@ -54,6 +57,9 @@
       <Filter>Pliki źródłowe</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
+      <Filter>Pliki źródłowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Wyjscie.h">
       <Filter>Pliki źródłowe</Filter>
     </ClInclude>
   </ItemGroup>

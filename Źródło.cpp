@@ -22,11 +22,12 @@ int main(){
 	sf::Clock zegar;	
 	interfejs p1(sf::Vector2f(760.f, 500.f));
 	gwiazdozbior tlo(1000);
-	Pokeball pb(400, 20, 760, 500);
+	Pokeball pb(200, 200, 760, 500);
 	paletka pal(320,504);
 	Menu menu(sf::Vector2f(760.f, 500.f));
 	int flaga = 0;
-	int a = 320;
+	
+	
 	while (window.isOpen())
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) break;
@@ -35,33 +36,58 @@ int main(){
 		{
 			
 			if (event.type == sf::Event::Closed )
-				window.close();
-			
+				window.close();			
 			
 			if (event.type == sf::Event::KeyPressed)
 			{	
 						
-				if (event.key.code == sf::Keyboard::A && a>30)
+				if (event.key.code == sf::Keyboard::A)
 				{
-				pal.przesun(-10, 0);
-				a = a - 10;
+					pal.Velmax = -10;
+					pal.update();
+					
 				}
-				if (event.key.code == sf::Keyboard::D && a<690)
+				if (event.key.code == sf::Keyboard::D)
 				{
-				pal.przesun(10, 0);
-				a = a + 10;
+					pal.Velmax = 10;
+					pal.update();
 				}		
 			}
+
+			if (event.type == sf::Event::KeyReleased)
+			{
+				if (event.key.code == sf::Keyboard::A)
+				{
+					pal.Velmax = 0.001;
+					pal.update();
+				}
+				if (event.key.code == sf::Keyboard::D)
+				{
+					pal.Velmax = 0.001;
+					pal.update();
+				}
+			}
+			
+			
+			
 		}
 
 		if (flaga==1)
 		{
+			cout << pal.Velmax << "..." << pal.Veloczekiwany << "..." << pal.Velteraz << "..." << pal.przyspieszenie<<endl;
 			if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
-			tlo.move();//nowa pozycja Toad'ow		
+			pal.ruch();
+			tlo.move();	
 			pb.animuj();
 			zegar.restart();
-			cout << pb.getPos().y << "\n";			
-			if (pb.getPos().x+50 >= pal.getPos().x-10 && pb.getPos().x+50 <= pal.getPos().x + 90 && pb.getPos().y+100 >= pal.getPos().y  && pb.getPos().y + 100 <= pal.getPos().y+10 )
+			if (pal.lewa_strona()<20) {
+				pal.setPos(20,504);
+			}
+			if (pal.prawa_strona() > 780) {
+				pal.setPos(690, 504);
+			}
+				
+			if (pb.getPos().x >= pal.lewa_strona() && pb.getPos().x <= pal.prawa_strona() && pb.dol() >= pal.gora() && pb.dol() <= pal.gora() + 2)
 		{
 			pb.odbicie();
 		}			
@@ -69,18 +95,24 @@ int main(){
 		
 			window.clear(sf::Color::Black);
 		tlo.draw(window);
-		p1.draw(window);
+		p1.draw(window);		
 		window.draw(pal.getPaletka());
 		window.draw(pb.getPokeball());
 		
-		if (pb.getPos().y == 450) 
+		if (pb.getPos().y >= 520) 
 		{
 			pb.draw(window);
 		}
 		}
 		if (flaga==0)	menu.draw(window);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E)) flaga = 1;
+		if (flaga == 2)	menu.draw(window);
+		if (flaga == 3)	menu.draw(window);
+		if (flaga == 4)	menu.draw(window);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)) flaga = 1;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) flaga = 0;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::T)) flaga = 2;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Y)) flaga = 3;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E)) flaga = 4;
 		window.display();
 	}
 
