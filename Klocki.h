@@ -3,16 +3,25 @@
 #include<random>
 #include<iostream>
 #include <string>
+#include <math.h>
 
 class Klocki {
 private:
-	sf::RectangleShape klocek;    
+	sf::RectangleShape klocek;
+    sf::Vector2f position;
 public:
-    float x() { return klocek.getPosition().x; }
-    float y() { return klocek.getPosition().y; }
-    float lewo() { return x() - klocek.getSize().x / 2.f; }
-    float prawo() { return x() + klocek.getSize().x / 2.f; }
-    float góra() { return y() - klocek.getSize().y / 2.f; }
-    float dó³() { return y() + klocek.getSize().y / 2.f; }
+    Klocki();
+    float kolizja=0;
+    float x();
+    float y();
+    float lewo();
+    float prawo();
+    float góra();
+    float dó³();
+    float znik();
+    sf::RectangleShape getklocek();
+    sf::Vector2f getPos();
+    void setPos(float  x_i, float y_i);
+    //float uderzenie(float g, float d);
 
 };

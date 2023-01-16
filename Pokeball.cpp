@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <SFML/Graphics.hpp>
 #include<random>
+#include <math.h>
 #include<iostream>
 #include <string>
 #include"Pokeball.h"
@@ -85,3 +86,11 @@ void Pokeball::animuj()
 		sprawdzKolizjeSciany();
 		przesun(xVel, yVel);
 	}
+void Pokeball::klocek_uderzony(float a) 
+{
+	
+	if (a != -100)
+	{
+		yVel = -yVel;
+	}
+}

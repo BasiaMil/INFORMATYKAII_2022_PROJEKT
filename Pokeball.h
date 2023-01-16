@@ -10,7 +10,7 @@ private:
 	sf::Text* koniec;
 	sf::Font* font;
 	sf::Vector2f position;
-	float xVel = 3, yVel = 3;
+	float xVel = 2, yVel = 2;
 	sf::Texture tekstura;
 	sf::Sprite pSprite;
 	sf::Vector2f rozmiar_okna;
@@ -33,4 +33,5 @@ public:
 	float prawa_strona() ;
 	float dol() ;
 	float gora() ;
+	void klocek_uderzony(float a);
 };

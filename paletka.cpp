@@ -5,10 +5,11 @@
 #include <string>
 #include "paletka.h"
 
-paletka::paletka(float x_in, float y_in)
+paletka::paletka(float x_in, float y_in, float Vm)
 	{
 		position.x = x_in;
 		position.y = y_in;
+		Velmax = Vm;
 		palletka.setFillColor(sf::Color(10, 50, 150));
 		palletka.setSize(sf::Vector2f(80, 30));
 		palletka.setOutlineThickness(10);
@@ -16,22 +17,22 @@ paletka::paletka(float x_in, float y_in)
 		palletka.setPosition(position);
 		
 	};
-float paletka::predkosc(float Velmax, float Velteraz, float przyspieszenie)
+float paletka::predkosc(float Veloczekiwan, float Veltera, float przyspieszeni)
 { 
 
-	float roznica = Velmax - Velteraz;
+	float roznica = Veloczekiwan - Veltera+0.5;
 	
-	if (roznica > przyspieszenie)
+	if (roznica > przyspieszeni)
 	{
-		return Velteraz + przyspieszenie;
+		return Veltera + przyspieszeni;
 	}
-	if (roznica < przyspieszenie)
+	if (roznica < przyspieszeni)
 	{
-		return Velteraz - przyspieszenie;
+		return Veltera - przyspieszeni;
 	}
 	else 
 	{
-		return Velmax;
+		return Veloczekiwan;
 	}
 };
 void paletka::setPos(float  x_i, float y_i)
@@ -46,8 +47,16 @@ float paletka::lewa_strona() { return getPos().x - 10; };
 float paletka::prawa_strona() { return getPos().x + 90; };
 float paletka::dol() { return getPos().y + 40; };
 float paletka::gora() { return getPos().y - 10; };
-void paletka::ruch() 
+/*void paletka::przesun()
+{
+	palletka.move(10,0);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) && prawa_strona()<780)
+	{
+
+	}
+};*/
+void paletka::ruch()
 {
 	palletka.move(Velteraz, 0);
 }
-void paletka::update() { Velteraz = predkosc(Velmax, Velteraz, przyspieszenie); };
+void paletka::update() { Velteraz = predkosc(Veloczekiwany, Velteraz, przyspieszenie); };

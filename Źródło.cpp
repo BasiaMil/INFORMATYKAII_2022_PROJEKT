@@ -8,6 +8,7 @@ przeszkód i ³apanie stworków oraz za ukoñczenie gry przed limitem czasu. Ujemne 
 #define _CRT_SECURE_NO_WARNINGS
 #include <SFML/Graphics.hpp>
 #include<random>
+#include <math.h>
 #include<iostream>
 #include <string>
 #include"interfejs.h"
@@ -15,6 +16,7 @@ przeszkód i ³apanie stworków oraz za ukoñczenie gry przed limitem czasu. Ujemne 
 #include"paletka.h"
 #include"Pokeball.h"
 #include"Menu.h"
+#include "Klocki.h"
 
 int main(){
 	using namespace std;
@@ -22,11 +24,13 @@ int main(){
 	sf::Clock zegar;	
 	interfejs p1(sf::Vector2f(760.f, 500.f));
 	gwiazdozbior tlo(1000);
-	Pokeball pb(200, 200, 760, 500);
-	paletka pal(320,504);
+	Pokeball pb(200, 250, 760, 500);
+	paletka pal(320,504,5);
 	Menu menu(sf::Vector2f(760.f, 500.f));
+	Klocki tab[30];
 	int flaga = 0;
-	
+	pal.Veloczekiwany = 0;
+	int punkty = 0;
 	
 	while (window.isOpen())
 	{
@@ -43,14 +47,14 @@ int main(){
 						
 				if (event.key.code == sf::Keyboard::A)
 				{
-					pal.Velmax = -10;
-					pal.update();
+					pal.Veloczekiwany = -pal.Velmax;
+					
 					
 				}
 				if (event.key.code == sf::Keyboard::D)
 				{
-					pal.Velmax = 10;
-					pal.update();
+					pal.Veloczekiwany = pal.Velmax;
+					
 				}		
 			}
 
@@ -58,46 +62,75 @@ int main(){
 			{
 				if (event.key.code == sf::Keyboard::A)
 				{
-					pal.Velmax = 0.001;
-					pal.update();
+					pal.Veloczekiwany = 0;
+					
 				}
 				if (event.key.code == sf::Keyboard::D)
 				{
-					pal.Velmax = 0.001;
-					pal.update();
+					pal.Veloczekiwany = 0;
+					
 				}
-			}
-			
-			
+			}			
 			
 		}
 
 		if (flaga==1)
 		{
-			cout << pal.Velmax << "..." << pal.Veloczekiwany << "..." << pal.Velteraz << "..." << pal.przyspieszenie<<endl;
-			if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
+			//cout << "Velmax:" << pal.Velmax << "..." <<"Veloczekiwany:"<< pal.Veloczekiwany  << "..." << "Velteraz:" << pal.Velteraz << "..."<<"przyspieszenie:" << pal.przyspieszenie << endl;
+			if (zegar.getElapsedTime().asMilliseconds() > 5.0f) 
+			{
+			pal.update();	
 			pal.ruch();
 			tlo.move();	
 			pb.animuj();
 			zegar.restart();
 			if (pal.lewa_strona()<20) {
-				pal.setPos(20,504);
+				pal.setPos(25,504);
 			}
 			if (pal.prawa_strona() > 780) {
-				pal.setPos(690, 504);
+				pal.setPos(689, 504);
 			}
 				
 			if (pb.getPos().x >= pal.lewa_strona() && pb.getPos().x <= pal.prawa_strona() && pb.dol() >= pal.gora() && pb.dol() <= pal.gora() + 2)
 		{
 			pb.odbicie();
-		}			
-		}		
+		}
+			
+		}
+					
 		
 			window.clear(sf::Color::Black);
 		tlo.draw(window);
 		p1.draw(window);		
 		window.draw(pal.getPaletka());
 		window.draw(pb.getPokeball());
+		
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 5; j++) {
+				if (tab[5 * i + j].getklocek().getGlobalBounds().intersects(pb.getPokeball().getGlobalBounds()))
+				{					
+					tab[5 * i + j].kolizja = 1;
+					tab[5 * i + j].setPos(-100,-100);
+					pb.klocek_uderzony( tab[i].x());
+					punkty = punkty + 1;
+					cout << "Punkty: " << punkty << "\n";
+				}
+				//cout <<"nr: " << 5 * i + j <<" wynosi "<< tab[5 * i + j].kolizja << "\n";
+				
+				//punkty += 1;
+				//cout << "Punkty: " << punkty << "\n";
+				
+				
+				if(tab[5 * i + j].kolizja==0)
+				{
+				tab[5 * i + j].setPos(60+150*j,70+i*50);
+				window.draw(tab[5 * i + j].getklocek());
+				}
+				
+			}
+
+		}
+		
 		
 		if (pb.getPos().y >= 520) 
 		{
