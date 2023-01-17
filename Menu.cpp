@@ -17,8 +17,6 @@ Menu::~Menu() {
 	prostokat = NULL;
 	delete Nowa;
 	Nowa = NULL;
-	delete Wczytaj;
-	Wczytaj = NULL;
 	delete Wyniki;
 	Wyniki = NULL;
 	delete Wyjscie;
@@ -31,43 +29,36 @@ void Menu::draw(sf::RenderWindow& window) {
 	window.draw(*tlo);
 	window.draw(*prostokat);
 	window.draw(*Nowa);
-	window.draw(*Wczytaj);
 	window.draw(*Wyniki);
 	window.draw(*Wyjscie);
 
 	
 }
 
-void Menu::setText(sf::Text* Nowa, sf::Text* Wczytaj, sf::Text* Wyniki, sf::Text* Wyjscie) {
+void Menu::setText(sf::Text* Nowa, sf::Text* Wyniki, sf::Text* Wyjscie) {
 
 	font = new sf::Font;
 	font->loadFromFile("arial.ttf");
 	Nowa->setFont(*font);
-	Wczytaj->setFont(*font);
 	Wyniki->setFont(*font);
 	Wyjscie->setFont(*font);
 
 	Nowa->setString("1.NOWA GRA");
 	Nowa->setFillColor(sf::Color(0, 0, 0));
-	Nowa->setPosition(300.f, 100.f);
+	Nowa->setPosition(300.f, 200.f);
 	
-	Wczytaj->setString("2.WCZYTAJ GRE");
-	Wczytaj->setFillColor(sf::Color(0, 0, 0));
-	Wczytaj->setPosition(300.f, 180.f);
-	
-	Wyniki->setString("3.WYNIKI");
+	Wyniki->setString("2.WYNIKI");
 	Wyniki->setFillColor(sf::Color(0, 0, 0));
-	Wyniki->setPosition(300.f, 260.f);
+	Wyniki->setPosition(300.f, 280.f);
 
-	Wyjscie->setString("4.EXIT");
+	Wyjscie->setString("3.EXIT");
 	Wyjscie->setFillColor(sf::Color(0, 0, 0));
-	Wyjscie->setPosition(300.f, 340.f);
+	Wyjscie->setPosition(300.f, 360.f);
 }
 
 void Menu::init(sf::Vector2f window_size) {
 
 	Nowa = new sf::Text;
-	Wczytaj = new sf::Text;
 	Wyniki = new sf::Text;
 	Wyjscie = new sf::Text;
 	prostokat = new sf::RectangleShape;
@@ -81,6 +72,6 @@ void Menu::init(sf::Vector2f window_size) {
 	tlo->setSize(sf::Vector2f(800.f,600.f));
 	tlo->setFillColor(sf::Color(0, 0, 0));
 
-	setText(Nowa, Wczytaj, Wyniki, Wyjscie);
+	setText(Nowa, Wyniki, Wyjscie);
 
 }

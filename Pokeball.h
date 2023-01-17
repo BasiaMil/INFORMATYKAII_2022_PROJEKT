@@ -8,6 +8,7 @@ class Pokeball {
 private:
 	void cos(sf::Vector2f window_size);
 	sf::Text* koniec;
+	sf::Text* wygrana;
 	sf::Font* font;
 	sf::Vector2f position;
 	float xVel = 2, yVel = 2;
@@ -20,11 +21,15 @@ private:
 public:
 
 	Pokeball(float x_in, float y_in, float x_a, float y_b);
+	void setV(float V);
 	void napis(sf::Text* koniec);
+	void napis_w(sf::Text* wygrana);
 	void draw(sf::RenderWindow& window);
+	void draw_w(sf::RenderWindow& window);
 	void przesun(float x_in, float y_in);
 	sf::Sprite getPokeball();
 	sf::Vector2f getPos();
+	void setPos(float x_i, float y_i);
 	void sprawdzKolizjeSciany();
 	void odbicie();
 	float stop();

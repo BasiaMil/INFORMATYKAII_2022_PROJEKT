@@ -45,13 +45,13 @@ void interfejs::setText(sf::Text* lewy, sf::Text* prawy, sf::Text* dolsrodek, sf
 	lewy->setFillColor(sf::Color(45, 8, 210));
 	lewy->setPosition(10.f, 5.f);
 
-	prawy->setString("Poziom:");
+	prawy->setString("Trudnosc:");
 	prawy->setFillColor(sf::Color(24, 200, 55));
 	prawy->setPosition(600.f, 5.f);
 
-	dolsrodek->setString("Animowany napis");
-	dolsrodek->setFillColor(sf::Color(80, 25, 8));
-	dolsrodek->setPosition(310.f, 550.f);
+	dolsrodek->setString("PAUZA/POMOC - F1");
+	dolsrodek->setFillColor(sf::Color(80, 250, 8));
+	dolsrodek->setPosition(270.f, 550.f);
 
 	gorasrodek->setString("Zycia");
 	gorasrodek->setFillColor(sf::Color(40, 80, 160));

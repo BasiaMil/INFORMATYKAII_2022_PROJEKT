@@ -10,7 +10,10 @@ void Pokeball::cos(sf::Vector2f window_size)
 {
 		koniec = new sf::Text;
 		napis(koniec);
+		wygrana = new sf::Text;
+		napis_w(wygrana);
 };
+
 Pokeball::Pokeball(float x_in, float y_in, float x_a, float y_b)
 	{
 		position.x = x_in;
@@ -24,7 +27,19 @@ Pokeball::Pokeball(float x_in, float y_in, float x_a, float y_b)
 		pSprite.setScale(0.5,0.5);
 		sf::Vector2f window_size(800.f, 600);
 		cos(window_size);
+		
 	}
+void Pokeball::setV(float V)
+{
+	yVel = V;
+	xVel = V;
+}
+void Pokeball::setPos(float  x_i, float y_i)
+{
+	position.x = x_i;
+	position.y = y_i;
+	pSprite.setPosition(position);
+};
 void Pokeball:: napis(sf::Text* koniec)
 	{
 		font = new sf::Font;
@@ -36,10 +51,27 @@ void Pokeball:: napis(sf::Text* koniec)
 		koniec->setFillColor(sf::Color(200, 20, 20));
 		koniec->setPosition(200.f, 350.f);
 	}
+void Pokeball::napis_w(sf::Text* wygrana)
+	{
+		font = new sf::Font;
+		font->loadFromFile("arial.ttf");
+		wygrana->setFont(*font);
+		wygrana->setString("Wygrales!!!");
+		wygrana->setCharacterSize(100);
+		wygrana->setRotation(-30);
+		wygrana->setFillColor(sf::Color(100, 20,255));
+		wygrana->setPosition(150.f, 330.f);
+	};
 void Pokeball::draw(sf::RenderWindow& window)
 	{
 		window.draw(*koniec);
 	}
+void Pokeball::draw_w(sf::RenderWindow& window)
+{
+	yVel = 0;
+	xVel = 0;
+	window.draw(*wygrana);
+}
 void Pokeball::przesun(float x_in, float y_in) 
 {
 		sf::Vector2f pos;

@@ -9,7 +9,6 @@ protected:
 	void init(sf::Vector2f window_size);
 	sf::Font* font;
 	sf::Text* Nowa;
-	sf::Text* Wczytaj;
 	sf::Text* Wyniki;
 	sf::Text* Wyjscie;
 	sf::RectangleShape* prostokat;
@@ -18,7 +17,7 @@ protected:
 
 public:
 	void draw(sf::RenderWindow& window);//
-	void setText(sf::Text* Nowa, sf::Text* Wczytaj, sf::Text* Wyniki, sf::Text* Wyjscie);//
+	void setText(sf::Text* Nowa, sf::Text* Wyniki, sf::Text* Wyjscie);//
 	Menu(sf::Vector2f wymiary);//
 	~Menu();//
 
