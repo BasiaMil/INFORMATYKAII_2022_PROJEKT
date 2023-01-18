@@ -11,8 +11,6 @@ protected:
 	sf::Text* Nowa;
 	sf::Text* Wyniki;
 	sf::Text* Wyjscie;
-	sf::RectangleShape* prostokat;
-	sf::RectangleShape* tlo;
 	sf::Vector2f wymiary;
 
 public:

@@ -13,21 +13,15 @@ Menu::Menu(sf::Vector2f wymiary) {
 	init(window_size);
 }
 Menu::~Menu() {
-	delete prostokat;
-	prostokat = NULL;
 	delete Nowa;
 	Nowa = NULL;
 	delete Wyniki;
 	Wyniki = NULL;
 	delete Wyjscie;
 	Wyjscie = NULL;
-	delete tlo;
-	tlo = NULL;
-
 }
 void Menu::draw(sf::RenderWindow& window) {
-	window.draw(*tlo);
-	window.draw(*prostokat);
+
 	window.draw(*Nowa);
 	window.draw(*Wyniki);
 	window.draw(*Wyjscie);
@@ -42,18 +36,25 @@ void Menu::setText(sf::Text* Nowa, sf::Text* Wyniki, sf::Text* Wyjscie) {
 	Nowa->setFont(*font);
 	Wyniki->setFont(*font);
 	Wyjscie->setFont(*font);
-
-	Nowa->setString("1.NOWA GRA");
-	Nowa->setFillColor(sf::Color(0, 0, 0));
-	Nowa->setPosition(300.f, 200.f);
 	
-	Wyniki->setString("2.WYNIKI");
-	Wyniki->setFillColor(sf::Color(0, 0, 0));
-	Wyniki->setPosition(300.f, 280.f);
 
-	Wyjscie->setString("3.EXIT");
-	Wyjscie->setFillColor(sf::Color(0, 0, 0));
+	Nowa->setString("1.NOWA GRA (N)");
+	Nowa->setFillColor(sf::Color(255, 0, 0));
+	Nowa->setPosition(300.f, 200.f);
+	Nowa->setCharacterSize(40);
+	Nowa->Bold;
+	
+	Wyniki->setString("2.WYNIKI (S)");
+	Wyniki->setFillColor(sf::Color(255, 0, 0));
+	Wyniki->setPosition(300.f, 280.f);
+	Wyniki->setCharacterSize(40);
+	Wyniki->Bold;
+
+	Wyjscie->setString("3.EXIT(W)");
+	Wyjscie->setFillColor(sf::Color(255, 0, 0));
 	Wyjscie->setPosition(300.f, 360.f);
+	Wyjscie->setCharacterSize(40);
+	Wyjscie->Bold;
 }
 
 void Menu::init(sf::Vector2f window_size) {
@@ -61,17 +62,7 @@ void Menu::init(sf::Vector2f window_size) {
 	Nowa = new sf::Text;
 	Wyniki = new sf::Text;
 	Wyjscie = new sf::Text;
-	prostokat = new sf::RectangleShape;
-	tlo = new sf::RectangleShape;
 	
-	prostokat->setPosition(20.f, 50.f);
-	prostokat->setSize(wymiary);
-	prostokat->setFillColor(sf::Color(10, 200, 10));
-
-	tlo->setPosition(0.f, 0.f);
-	tlo->setSize(sf::Vector2f(800.f,600.f));
-	tlo->setFillColor(sf::Color(0, 0, 0));
-
 	setText(Nowa, Wyniki, Wyjscie);
 
 }

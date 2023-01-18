@@ -12,6 +12,7 @@ przeszkód i ³apanie stworków oraz za ukoñczenie gry przed limitem czasu. Ujemne 
 #include<iostream>
 #include <string>
 #include <cstdlib>
+#include<sstream>
 #include"interfejs.h"
 #include"gwiazdozbior.h"
 #include"paletka.h"
@@ -37,8 +38,8 @@ int main(){
 	Pomoc pom(sf::Vector2f(760.f, 500.f));
 	int flaga = 0;
 	pal.Veloczekiwany = 0;
-	int punkty = 0;
-	int zycia = 3;
+	double punkty = 0;
+	double zycia = 3;
 	
 while (window.isOpen())
 {
@@ -74,7 +75,12 @@ while (window.isOpen())
 		}
 
 		if (flaga==1)
-		{			
+		{	
+			p1.init({ 800.f, 600 });
+			p1.setzycie(zycia);
+			p1.setpkt(punkty);
+			//p1.zycia = zycia;
+			//p1.pkt = punkty;
 			if (zegar.getElapsedTime().asMilliseconds() > 5.0f) 
 			{			
 			pal.update();	
@@ -111,11 +117,12 @@ while (window.isOpen())
 						tab[5 * i + j].setPos(-100,-100);
 						pb.klocek_uderzony( tab[i].x());
 						punkty = punkty + 1;
+						
 						cout << "Punkty: " << punkty << "\n";
 					}								
 					if(tab[5 * i + j].kolizja==0)
 					{
-						tab[5 * i + j].setPos(60+150*j,70+i*50);
+						tab[5 * i + j].setPos(70+150*j,70+i*60);
 						window.draw(tab[5 * i + j].getklocek());
 					}				
 				}
@@ -143,9 +150,27 @@ while (window.isOpen())
 
 		if (flaga == 0)
 		{
+			window.clear(sf::Color::Black);
+			if (zegar.getElapsedTime().asMilliseconds() > 5.0f)
+			{
+				tlo.move();
+			}			
+			tlo.draw(window);
 			menu.draw(window);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) flaga = 2;//wyjœcie
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::N)) flaga = 3;//wybranie poziomu
+			pal.setPos(320, 504);
+			pb.setPos(200, 250);
+			for (int i = 0; i < 3; i++)
+			{
+				for (int j = 0; j < 5; j++)
+				{
+						tab[5 * i + j].kolizja = 0;
+				}
+			}
+			punkty = 0;
+			zycia = 3;
+
 		}
 
 		if (flaga == 2)
