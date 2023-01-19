@@ -208,7 +208,7 @@ while (window.isOpen())
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) flaga = 0;//menu
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)) 
 			{
-				flaga = 1;//wybranie poziomu
+				//wybranie poziomu
 			pal.setPos(320, 504);
 			pb.setPos(200, 250);
 			for (int i = 0; i < 3; i++)
@@ -220,6 +220,7 @@ while (window.isOpen())
 			}
 			punkty = 0;
 			zycia = 3;
+			flaga = 1;
 			}
 				
 		}
