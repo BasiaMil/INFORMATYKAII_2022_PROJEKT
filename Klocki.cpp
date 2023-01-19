@@ -10,7 +10,7 @@
     {
         klocek.setPosition(55, 100);
         klocek.setSize(sf::Vector2f(70, 30));
-        klocek.setFillColor(sf::Color(213, 249, 72));
+        klocek.setFillColor(sf::Color(255, 0, 255));
         klocek.setOrigin(35, 15);
         klocek.setOutlineThickness(2);
         klocek.setOutlineColor(sf::Color(0, 0, 0));

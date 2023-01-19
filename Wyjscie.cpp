@@ -53,15 +53,15 @@ void Wyjscie::setText(sf::Text* Pytanie, sf::Text* Tak, sf::Text* Nie) {
 	Nie->setFont(*font);
 
 	Pytanie->setString("CZY NA PEWNO CHCESZ OPUSCIC GRE?");
-	Pytanie->setFillColor(sf::Color(0, 0, 0));
+	Pytanie->setFillColor(sf::Color(255, 255, 255));
 	Pytanie->setPosition(100.f, 200.f);
 
 	Tak->setString("TAK (T)");
-	Tak->setFillColor(sf::Color(0, 0, 0));
+	Tak->setFillColor(sf::Color(255, 255, 255));
 	Tak->setPosition(200.f, 280.f);
 
-	Nie->setString("NIE (N)");
-	Nie->setFillColor(sf::Color(0, 0, 0));
+	Nie->setString("NIE (I)");
+	Nie->setFillColor(sf::Color(255, 255, 255));
 	Nie->setPosition(440.f, 280.f);
 }
 
@@ -78,23 +78,23 @@ void Wyjscie::init(sf::Vector2f window_size) {
 
 	prostokat->setPosition(20.f, 50.f);
 	prostokat->setSize(wymiary);
-	prostokat->setFillColor(sf::Color(10, 200, 10));
+	prostokat->setFillColor(sf::Color(0, 0, 153));
 	
 	prostokat_p->setPosition(95.f, 180.f);
 	prostokat_p->setSize({ 600,65 });
-	prostokat_p->setFillColor(sf::Color(250, 200, 10));	
+	prostokat_p->setFillColor({ 51, 0, 102 });
 	prostokat_p->setOutlineColor({ 0,0,0 });
 	prostokat_p->setOutlineThickness(5);
 
 	prostokat_t->setPosition(195.f, 270.f);
 	prostokat_t->setSize({120,65});
-	prostokat_t->setFillColor(sf::Color(250, 200, 10));
+	prostokat_t->setFillColor({ 51, 0, 102 });
 	prostokat_t->setOutlineColor({ 0,0,0 });
 	prostokat_t->setOutlineThickness(5);
 
 	prostokat_n->setPosition(435.f, 270.f);
 	prostokat_n->setSize({ 120,65 });
-	prostokat_n->setFillColor(sf::Color(250, 200, 10));
+	prostokat_n->setFillColor({ 51, 0, 102 });
 	prostokat_n->setOutlineColor({ 0,0,0 });
 	prostokat_n->setOutlineThickness(5);
 

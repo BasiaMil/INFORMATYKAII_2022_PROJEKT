@@ -66,24 +66,24 @@ void Poziom::setText(sf::Text* Sterowanie, sf::Text* Pytanie, sf::Text* Easy, sf
 	Hard->setFont(*font);
 
 	Sterowanie->setString("Odbij pilke paletka by zbic klocki. Poruszaj klawiszami A i D.");
-	Sterowanie->setFillColor(sf::Color(0, 0, 0));
+	Sterowanie->setFillColor(sf::Color(255, 255, 255));
 	Sterowanie->setPosition(38.f, 103.f);
 	Sterowanie->setCharacterSize(27);
 	
 	Pytanie->setString("Jaki poziom trudnosci gry wybierasz?");
-	Pytanie->setFillColor(sf::Color(0, 0, 0));
+	Pytanie->setFillColor(sf::Color(255, 255, 255));
 	Pytanie->setPosition(130.f, 190.f);
 
 	Easy->setString("EASY (E)");
-	Easy->setFillColor(sf::Color(0, 0, 0));
+	Easy->setFillColor(sf::Color(255, 255, 255));
 	Easy->setPosition(120.f, 300.f);
 
 	Medium->setString("MEDIUM (M)");
-	Medium->setFillColor(sf::Color(0, 0, 0));
+	Medium->setFillColor(sf::Color(255, 255, 255));
 	Medium->setPosition(315.f, 300.f);
 
 	Hard->setString("HARD (H)");
-	Hard->setFillColor(sf::Color(0, 0, 0));
+	Hard->setFillColor(sf::Color(255, 255, 255));
 	Hard->setPosition(550.f, 300.f);
 }
 
@@ -104,35 +104,35 @@ void Poziom::init(sf::Vector2f window_size) {
 
 	prostokat->setPosition(20.f, 50.f);
 	prostokat->setSize(wymiary);
-	prostokat->setFillColor(sf::Color(10, 200, 10));
+	prostokat->setFillColor(sf::Color(0, 0, 153));
 
 	prostokat_s->setPosition(26.f, 90.f);
 	prostokat_s->setSize({ 748,65 });
-	prostokat_s->setFillColor(sf::Color(250, 200, 10));
+	prostokat_s->setFillColor({ 51, 0, 102 });
 	prostokat_s->setOutlineColor({ 0,0,0 });
 	prostokat_s->setOutlineThickness(5);
 
 	prostokat_p->setPosition(125.f, 180.f);
 	prostokat_p->setSize({ 513,65 });
-	prostokat_p->setFillColor(sf::Color(250, 200, 10));
+	prostokat_p->setFillColor({ 51, 0, 102 });
 	prostokat_p->setOutlineColor({ 0,0,0 });
 	prostokat_p->setOutlineThickness(5);
 
 	prostokat_e->setPosition(110.f, 285.f);
 	prostokat_e->setSize({ 145,65 });
-	prostokat_e->setFillColor(sf::Color(250, 200, 10));
+	prostokat_e->setFillColor({ 51, 0, 102 });
 	prostokat_e->setOutlineColor({ 0,0,0 });
 	prostokat_e->setOutlineThickness(5);
 
 	prostokat_m->setPosition(310.f, 285.f);
 	prostokat_m->setSize({ 185,65 });
-	prostokat_m->setFillColor(sf::Color(250, 200, 10));
+	prostokat_m->setFillColor({ 51, 0, 102 });
 	prostokat_m->setOutlineColor({ 0,0,0 });
 	prostokat_m->setOutlineThickness(5);
 
 	prostokat_h->setPosition(545.f, 285.f);
 	prostokat_h->setSize({ 145,65 });
-	prostokat_h->setFillColor(sf::Color(250, 200, 10));
+	prostokat_h->setFillColor({ 51, 0, 102 });
 	prostokat_h->setOutlineColor({ 0,0,0 });
 	prostokat_h->setOutlineThickness(5);
 

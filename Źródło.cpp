@@ -150,7 +150,7 @@ while (window.isOpen())
 
 		if (flaga == 0)
 		{
-			window.clear(sf::Color::Black);
+			window.clear(sf::Color(1,1,25));
 			if (zegar.getElapsedTime().asMilliseconds() > 5.0f)
 			{
 				tlo.move();
@@ -177,7 +177,8 @@ while (window.isOpen())
 		{
 			wyj.draw(window);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::T)) break;//zamkniêcie programu
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) flaga = 0;//menu
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::I)) flaga = 0;//menu
+			
 		}
 
 		if (flaga == 3)
@@ -205,11 +206,23 @@ while (window.isOpen())
 			pom.draw(window);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::K)) flaga = 1;//zamkniêcie programu
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) flaga = 0;//menu
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)) 
+			{
+				flaga = 1;//wybranie poziomu
+			pal.setPos(320, 504);
+			pb.setPos(200, 250);
+			for (int i = 0; i < 3; i++)
+			{
+				for (int j = 0; j < 5; j++)
+				{
+					tab[5 * i + j].kolizja = 0;
+				}
+			}
+			punkty = 0;
+			zycia = 3;
+			}
+				
 		}
-		
-		
-		
-		
 		window.display();
 	}
 

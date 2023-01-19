@@ -72,7 +72,7 @@ void interfejs::init(sf::Vector2f window_size) {
 
 	prostokat->setPosition(20.f, 50.f);
 	prostokat->setSize(wymiary);
-	prostokat->setFillColor(sf::Color(10, 200, 100));
+	prostokat->setFillColor(sf::Color(0, 0, 153));
 
 	setText(lewy, prawy, dolsrodek, gorasrodek, pkt, zycia);
 

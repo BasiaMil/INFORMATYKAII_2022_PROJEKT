@@ -12,6 +12,8 @@ protected:
 	sf::Text* Instrukcja;
 	sf::Text* Kontynuuj;
 	sf::Text* Wyjscie;
+	sf::Text* restart;
+	sf::RectangleShape* prostokat_r;
 	sf::RectangleShape* prostokat;
 	sf::RectangleShape* prostokat_i;
 	sf::RectangleShape* prostokat_k;
@@ -21,7 +23,7 @@ protected:
 
 public:
 	void draw(sf::RenderWindow& window);
-	void setText(sf::Text* Pomoc, sf::Text* Kontynuuj, sf::Text* Wyjscie);
+	void setText(sf::Text* Pomoc, sf::Text* Kontynuuj, sf::Text* Wyjscie, sf::Text* restart);
 	Pomoc(sf::Vector2f wymiary);
 	~Pomoc();
 

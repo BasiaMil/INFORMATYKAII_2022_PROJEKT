@@ -138,7 +138,6 @@
     <ClCompile Include="Pauza.cpp" />
     <ClCompile Include="Pokeball.cpp" />
     <ClCompile Include="Poziom.cpp" />
-    <ClCompile Include="Punkty.cpp" />
     <ClCompile Include="Wyjscie.cpp" />
     <ClCompile Include="Źródło.cpp" />
   </ItemGroup>
@@ -151,7 +150,6 @@
     <ClInclude Include="Pauza.h" />
     <ClInclude Include="Pokeball.h" />
     <ClInclude Include="Poziom.h" />
-    <ClInclude Include="Punkty.h" />
     <ClInclude Include="Wyjscie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

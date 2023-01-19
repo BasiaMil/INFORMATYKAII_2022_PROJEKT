@@ -45,9 +45,6 @@
     <ClCompile Include="Pauza.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Punkty.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="interfejs.h">
@@ -75,9 +72,6 @@
       <Filter>Pliki źródłowe</Filter>
     </ClInclude>
     <ClInclude Include="Pauza.h">
-      <Filter>Pliki źródłowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Punkty.h">
       <Filter>Pliki źródłowe</Filter>
     </ClInclude>
   </ItemGroup>

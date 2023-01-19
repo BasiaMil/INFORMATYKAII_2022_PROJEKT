@@ -12,7 +12,7 @@ protected:
 	sf::Text* Wyniki;
 	sf::Text* Wyjscie;
 	sf::Vector2f wymiary;
-
+	sf::RectangleShape* prostokat;
 public:
 	void draw(sf::RenderWindow& window);//
 	void setText(sf::Text* Nowa, sf::Text* Wyniki, sf::Text* Wyjscie);//
